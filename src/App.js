@@ -1,20 +1,8 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import { getCountryApi } from "./api/getCountry";
-import Table from "./components/Table";
-// import Input from "./input/Input.jsx";
-import "./input/Input.css";
 
-// ?
-const filterCounrties = (searchText, listOfCountries) => {
-  if (!searchText) {
-    return listOfCountries;
-  }
-  return listOfCountries.filter(({ common }) =>
-    common.toLowerCase().includes(searchText.toLowerCase())
-  );
-};
-
+//!
 function App() {
   const [country, setCountries] = useState([]);
 
@@ -25,17 +13,12 @@ function App() {
   }, []);
   console.log(country);
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [countryList, setCountryList] = useState(country);
-  //
-  useEffect(() => {
-    const Debounce = setTimeout(() => {
-      const filteredCounrties = filterCounrties(searchTerm, country);
-      setCountryList(filteredCounrties);
-    }, 300);
-
-    return () => clearTimeout(Debounce);
-  }, [searchTerm]);
+  const [searchValue, setSearchValue] = useState("");
+  const filteredCounrties = country.filter((country) => {
+    return country.name.common
+      .toLowerCase()
+      .includes(searchValue.toLowerCase());
+  });
 
   return (
     <div key={country.ccn3} className="App">
@@ -46,13 +29,39 @@ function App() {
             className="search"
             type="text"
             placeholder="Search"
-            onChange={(event) => setSearchTerm(event.target.value)}
+            onChange={(event) => setSearchValue(event.target.value)}
           />
         </form>
       </div>
-      <Table country={country} />
+      <div className="table">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Capital</th>
+              <th>Region</th>
+              <th>Population</th>
+              <th>Flags</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredCounrties.map((elem) => {
+              return (
+                <tr>
+                  <td className="td-name">{elem.name.common}</td>
+                  <td>{elem.capital}</td>
+                  <td>{elem.subregion}</td>
+                  <td>{elem.population}</td>
+                  <td>
+                    <img width={150} height={100} src={elem.flags.svg} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
-// );
 export default App;
