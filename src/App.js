@@ -3,11 +3,6 @@ import React, { useState, useEffect } from "react";
 import { getCountryApi } from "./api/getCountry";
 import Modal from "./modal/Modal.jsx";
 
-import "antd/dist/antd.css";
-// import { Modal } from "antd";
-
-// !!!!!!!!!!!!!!!!!
-// !!!!!!!!!!!!!!!!!
 // !!!!!!!!!!!!!!!!!
 function App(props) {
   const [currentModal, setCurrentModal] = useState(true);
@@ -19,8 +14,6 @@ function App(props) {
   };
   console.log(currentModal);
 
-  // !!!!!!!!!!!!!!!!!
-  // !!!!!!!!!!!!!!!!!
   // !!!!!!!!!!!!!!!!!
   const [country, setCountries] = useState([]);
   useEffect(() => {
@@ -36,8 +29,6 @@ function App(props) {
       .toLowerCase()
       .includes(searchValue.toLowerCase());
   });
-  // !!!!!!!!!!!!!!!!!
-  // !!!!!!!!!!!!!!!!!
   // !!!!!!!!!!!!!!!!!
   const [modalActive, setModalActive] = useState(false);
   //

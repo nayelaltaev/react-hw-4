@@ -8,13 +8,13 @@ const Modal = (props) => {
     <div className="modal" onClick={props.onClose}>
       <div className="modal-content" onClick={(elem) => elem.stopPropagation()}>
         <div className="modal-header">
-          <h4 className="modal-title">{props.name.common}</h4>
+          <h4 className="modal-title">{props.name.official}</h4>
         </div>
         <div className="modal-body">
           <div>
-            <h2>Name: {props.name.common}</h2>
             <h2>Capital: {props.capital}</h2>
             <h2>Population: {props.population}</h2>
+            <h2>Timezone: {props.timezones}</h2>
             <img src={props.flags.svg} alt="" width="250" height="200" />
           </div>
         </div>
